@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+
 	"github.com/IwatsukaYura/speee_api/handlers"
 
 	"github.com/gorilla/mux"
@@ -11,8 +12,8 @@ import (
 func main() {
 	r := mux.NewRouter()
 
-	r.HandleFunc("/hello", handlers.HelloHandler).Methods(http.MethodGet)
+	r.HandleFunc("/fib", handlers.FibonacciHandler).Methods(http.MethodGet)
 
-	log.Println("Listing for requests at http://localhost:8080")
+	log.Println("Listing for requests")
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
