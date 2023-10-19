@@ -9,37 +9,11 @@ import (
 	"github.com/IwatsukaYura/speee_api/models"
 )
 
-// n番目のフィボナッチ数を返すよ
-// ただし、nは1以上の整数とする(0以下の場合は0を返す)
-// func Fibonacci(n int) int {
-// 	if n <= 0 {
-// 		return 0
-// 	}
-// 	if n <= 1 {
-// 		return n
-// 	}
 
-// 	return Fibonacci(n-1) + Fibonacci(n-2)
-// }
-
-// var memo = make(map[uint64] uint64)
-
-// func fibonacci(n uint64) uint64 {
-// 	if n <= 0 {
-// 		return 0
-// 	}
-// 	if n <= 1 {
-// 		return 1
-// 	}
-
-// 	if val, ok := memo[n]; ok {
-// 		return val
-// 	}
-
-// 	memo[n] = fibonacci(n-1) + fibonacci(n-2)
-// 	return memo[n]
-// }
-
+// フィボナッチ数列のn番目の値を返す
+//引数：n番目を表す整数
+//戻り値：n番目のフィボナッチ数の値
+//例外：nが0以下の場合は0を返す
 func Fibonacci(n int64) *big.Int {
 	if n <= 0 {
 		return big.NewInt(0)
@@ -55,7 +29,8 @@ func Fibonacci(n int64) *big.Int {
 	return b
 }
 
-// エラーをjson形式で返す
+// エラーをjson形式で返す関数
+//引数：http.ResponseWriter, エラーメッセージ
 func jsonError(w http.ResponseWriter, message string) {
 	Error := models.Error{Status: http.StatusBadRequest, Message: message}
 	jsonError, err := json.Marshal(Error)
@@ -66,11 +41,13 @@ func jsonError(w http.ResponseWriter, message string) {
 	w.Write(jsonError)
 }
 
+
 func FibonacciHandler(w http.ResponseWriter, req *http.Request) {
 	queryMap := req.URL.Query()
 
-	var n int64
-	var result *big.Int
+	var n int64		// n番目を表す整数
+	var result *big.Int	// n番目のフィボナッチ数の値
+
 	if p, ok := queryMap["n"]; ok && len(p) > 0 {
 		var err error
 		n, err = strconv.ParseInt(p[0], 10, 64)
@@ -83,6 +60,8 @@ func FibonacciHandler(w http.ResponseWriter, req *http.Request) {
 	}
 
 	result = Fibonacci(n)
+
+	// 0以下の整数が入力された場合はエラーを返す
 	if result.Cmp(big.NewInt(0)) == 0 {
 		jsonError(w, "1以上の整数を入力してください。")
 		return
