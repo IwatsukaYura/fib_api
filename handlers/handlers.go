@@ -31,7 +31,7 @@ func Fibonacci(n int64) *big.Int {
 }
 
 // エラーをjson形式で返す関数
-// 引数：http.ResponseWriter, エラーメッセージ
+// 引数：http.ResponseWriter,ステータスコード ,エラーメッセージ
 func jsonError(w http.ResponseWriter, status int ,message string) {
 	Error := models.Error{Status: status, Message: message}
 	jsonError, err := json.Marshal(Error)
