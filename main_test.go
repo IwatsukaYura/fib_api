@@ -19,7 +19,6 @@ func TestFibonacci(t *testing.T) {
 		{5, big.NewInt(5)},
 		{10, big.NewInt(55)},
 		{20, big.NewInt(6765)},
-		// 他にもテストケースを追加できます
 	}
 
 	for _, test := range tests {
@@ -38,7 +37,7 @@ func TestFibonacciHandler(t *testing.T) {
 		{"?n=5", `{"result":5}`},
 		{"?n=10", `{"result":55}`},
 		{"?n=0", `{"status":400,"message":"1以上の整数を入力してください。"}`},
-		{"", `{"result":1}`},
+		{"", `{"status":400,"message":"クエリパラメータが正常ではありません。"}`},
 		{"?n=abc", `{"status":400,"message":"クエリパラメータが正常ではありません。"}`},
 	}
 

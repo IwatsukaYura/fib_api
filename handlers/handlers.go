@@ -43,11 +43,10 @@ func jsonError(w http.ResponseWriter, message string) {
 
 
 func FibonacciHandler(w http.ResponseWriter, req *http.Request) {
-	queryMap := req.URL.Query()
-
 	var n int64		// n番目を表す整数
 	var result *big.Int	// n番目のフィボナッチ数の値
-
+	
+	queryMap := req.URL.Query()
 	if p, ok := queryMap["n"]; ok && len(p) > 0 {
 		var err error
 		n, err = strconv.ParseInt(p[0], 10, 64)
@@ -56,7 +55,8 @@ func FibonacciHandler(w http.ResponseWriter, req *http.Request) {
 			return
 		}
 	} else {
-		n = 1
+		jsonError(w, "クエリパラメータが正常ではありません。")
+		return
 	}
 
 	result = Fibonacci(n)
