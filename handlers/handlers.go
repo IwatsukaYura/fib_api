@@ -6,9 +6,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/IwatsukaYura/speee_api/models"
+	"github.com/IwatsukaYura/fib_api/models"
 )
-
 
 // フィボナッチ数列のn番目の値を返す
 //引数：n番目を表す整数
@@ -45,7 +44,7 @@ func jsonError(w http.ResponseWriter, message string) {
 func FibonacciHandler(w http.ResponseWriter, req *http.Request) {
 	var n int64		// n番目を表す整数
 	var result *big.Int	// n番目のフィボナッチ数の値
-	
+
 	queryMap := req.URL.Query()
 	if p, ok := queryMap["n"]; ok && len(p) > 0 {
 		var err error

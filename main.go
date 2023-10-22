@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/IwatsukaYura/speee_api/handlers"
+	"github.com/IwatsukaYura/fib_api/handlers"
 
 	"github.com/gorilla/mux"
 )
