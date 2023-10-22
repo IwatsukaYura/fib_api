@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/IwatsukaYura/fib_api/handlers"
+	"github.com/IwatsukaYura/speee_api/handlers"
 )
 
 func TestFibonacci(t *testing.T) {
